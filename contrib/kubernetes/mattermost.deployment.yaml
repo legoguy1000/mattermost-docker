@@ -17,7 +17,32 @@ spec:
     spec:
       containers:
       - name: mattermost-app
-        image: "mattermost/mattermost-prod-app:5.14.1"
+        image: "postgres:12.1"
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: mattermost.env
+              key: mm-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mattermost.env
+              key: mm-password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: mattermost.env
+              key: mm-dbname
+        volumeMounts:
+        # optional persistent storage
+        #- name: appdata
+          #mountPath: /mattermost/data
+        - name: etclocaltime
+          mountPath: /etc/localtime
+          readOnly: true
+      - name: mattermost-app
+        image: "mattermost/mattermost-prod-app:5.18.0"
         env:
         - name: DB_HOST
           valueFrom:
