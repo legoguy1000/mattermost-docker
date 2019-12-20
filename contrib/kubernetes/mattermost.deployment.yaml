@@ -45,10 +45,7 @@ spec:
         image: "mattermost/mattermost-prod-app:5.18.0"
         env:
         - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: mattermost.env
-              key: db-host
+          value: localhost
         - name: DB_PORT_NUMBER
           valueFrom:
             secretKeyRef:
