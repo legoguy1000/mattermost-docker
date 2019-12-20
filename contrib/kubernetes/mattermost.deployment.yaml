@@ -16,7 +16,7 @@ spec:
         tier: app
     spec:
       containers:
-      - name: mattermost-app
+      - name: db
         image: "postgres:12.1"
         env:
         - name: POSTGRES_USER
